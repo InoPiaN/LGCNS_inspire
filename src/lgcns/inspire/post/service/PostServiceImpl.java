@@ -1,6 +1,7 @@
 package lgcns.inspire.post.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -75,4 +76,15 @@ public class PostServiceImpl implements PostService {
         return result.isEmpty() ? Optional.empty() : Optional.of(result);
     }
 
+    @Override
+    public int deleteService(Map<String, Integer> map) {
+        System.out.println(">>>>> post service deleteService : params id " + map.get("key"));
+        return dao.deleteRow(map);
+    }
+
+    @Override
+    public int updateService(PostRequestDTO request) {
+        System.out.println(">>>>> post service deleteService : params  request" + request);
+        return dao.updateRow(request);
+    }
 }

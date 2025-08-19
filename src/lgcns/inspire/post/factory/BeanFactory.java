@@ -28,10 +28,10 @@ public class BeanFactory {
         service = new PostServiceImpl();
         map = new HashMap<>();
         map.put("list", new PostListCtrl(service));
-        map.put("find", new PostFindCtrl());
-        map.put("insert", new PostInsertCtrl());
-        map.put("update", new PostUpdateCtrl());
-        map.put("delete", new PostDeleteCtrl());
+        map.put("find", new PostFindCtrl(service));
+        map.put("insert", new PostInsertCtrl(service));
+        map.put("update", new PostUpdateCtrl(service));
+        map.put("delete", new PostDeleteCtrl(service));
         map.put("search", new PostSearchCtrl(service));
 
     }

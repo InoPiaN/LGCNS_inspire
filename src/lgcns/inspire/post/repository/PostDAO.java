@@ -3,6 +3,7 @@ package lgcns.inspire.post.repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import lgcns.inspire.post.domain.dto.PostRequestDTO;
 import lgcns.inspire.post.domain.dto.PostResponseDTO;
@@ -68,15 +69,45 @@ public class PostDAO {
     // }
 
     // U(수정)
+    // Stream peek() : 원본리스트 안의 객체 속성을 변경할 수 있다.
     public int updateRow(PostRequestDTO request) {
         System.out.println(">>>> dao updateRow");
-        return 0;
+
+        // for (int idx = 0; idx < posts.size(); idx++) {
+        // PostResponseDTO post = posts.get(idx);
+        // if (post.getId() == request.getId()) {
+        // post.setTitle(request.getTitle());
+        // post.setContent(request.getContent());
+        // }
+        // }
+
+        // posts.stream()
+        // .filter(post -> post.getId() == request.getId())
+        // .findFirst()
+        // .isPresent(post -> {
+        // psot.setTitle(request.getTitle());
+        // post.setContent(request.getContent());
+        // });
+
+        boolean flag = posts.stream()
+                .filter(post -> post.getId() == request.getId())
+                .peek(post -> {
+                    post.setTitle(request.getTitle());
+                    post.setContent(request.getContent());
+                })
+                .anyMatch(post -> true);
+
+        return (flag) ? 1 : 0;
     }
 
     // D(삭제)
-    public int deleteRow(String id) {
-        System.out.println(">>>> dao deleteRow id");
-        return 0;
+    public int deleteRow(Map<String, Integer> map) {
+        System.out.println(">>>> dao deleteRow id" + map.get("key"));
+
+        // delete from table where id = ? (SQL)
+        boolean flag = posts.removeIf(post -> post.getId() == map.get("key"));
+
+        return (flag) ? 1 : 0;
     }
 
 }
