@@ -6,6 +6,7 @@ import java.util.Map;
 import lgcns.inspire.post.ctrl.PostFindCtrl;
 import lgcns.inspire.post.ctrl.PostInsertCtrl;
 import lgcns.inspire.post.ctrl.PostListCtrl;
+import lgcns.inspire.post.ctrl.PostSaveCtrl;
 import lgcns.inspire.post.ctrl.PostSearchCtrl;
 import lgcns.inspire.post.ctrl.PostUpdateCtrl;
 import lgcns.inspire.post.service.PostService;
@@ -33,6 +34,7 @@ public class BeanFactory {
         map.put("update", new PostUpdateCtrl(service));
         map.put("delete", new PostDeleteCtrl(service));
         map.put("search", new PostSearchCtrl(service));
+        map.put("save", new PostSaveCtrl(service));
 
     }
 

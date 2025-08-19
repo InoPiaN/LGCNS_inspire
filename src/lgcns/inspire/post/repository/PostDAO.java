@@ -1,5 +1,7 @@
 package lgcns.inspire.post.repository;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,20 @@ public class PostDAO {
     private List<PostResponseDTO> posts;
 
     public PostDAO() {
+        // 파일 입출력을 위해서 데이터 저장 및 로드를 위해
+        posts = new ArrayList<PostResponseDTO>();
 
+        // 파일 입력
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("C:\\inspire\\be\\inspire-java\\test.txt"))) {
+            posts.clear();
+            posts = (List<PostResponseDTO>) ois.readObject();
+            posts.stream()
+                    .forEach(System.out::println);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // 초기 데이터 생성
         posts = new ArrayList<>(Arrays.asList(
                 PostResponseDTO.builder()
@@ -57,7 +72,6 @@ public class PostDAO {
     // R(전체 검색)
     public List<PostResponseDTO> selectRow() {
         System.out.println(">>>> dao selectRow");
-        // 데이터베이스 연동 후 값을 가져온다고 가정하고 더미데이터를 생성
         return posts;
 
     }
@@ -81,11 +95,11 @@ public class PostDAO {
         // }
         // }
 
-        // posts.stream()
+        // Optional<PostResponseDTO> response = posts.stream()
         // .filter(post -> post.getId() == request.getId())
-        // .findFirst()
-        // .isPresent(post -> {
-        // psot.setTitle(request.getTitle());
+        // .findFirst();
+        // if(request.isPresent())
+        // {psot.setTitle(request.getTitle());
         // post.setContent(request.getContent());
         // });
 

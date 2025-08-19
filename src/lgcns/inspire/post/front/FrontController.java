@@ -8,6 +8,7 @@ import lgcns.inspire.post.ctrl.PostDeleteCtrl;
 import lgcns.inspire.post.ctrl.PostFindCtrl;
 import lgcns.inspire.post.ctrl.PostInsertCtrl;
 import lgcns.inspire.post.ctrl.PostListCtrl;
+import lgcns.inspire.post.ctrl.PostSaveCtrl;
 import lgcns.inspire.post.ctrl.PostSearchCtrl;
 import lgcns.inspire.post.ctrl.PostUpdateCtrl;
 import lgcns.inspire.post.domain.dto.PostResponseDTO;
@@ -65,5 +66,14 @@ public class FrontController {
 
         PostSearchCtrl obj = (PostSearchCtrl) factory.getCtrl(requestURL);
         return obj.search(writer);
+    }
+
+    public boolean save(String requestURL) {
+        System.out.println(">>>> front ctrl save : ");
+
+        // PostSaveCtrl - save() - saveToFile() : TO 스트림을 이용한 데이터 저장
+        PostSaveCtrl obj = (PostSaveCtrl) factory.getCtrl(requestURL);
+
+        return obj.save();
     }
 }

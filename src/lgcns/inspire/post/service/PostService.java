@@ -23,4 +23,9 @@ public interface PostService {
 
     // update
     public int updateService(PostRequestDTO request);
+
+    // file save or load
+    public List<PostResponseDTO> loadToFile();
+
+    public boolean saveToFile();
 }
